@@ -7,7 +7,7 @@ import random
 import requests
 from discord.utils import get
 Client = discord.Client()
-client = commands.Bot(command_prefix = "dank")
+client = commands.Bot(command_prefix = "")
 
 
 @client.event
@@ -24,14 +24,14 @@ async def on_message(message):
         space = ' '
         name = space.join(name)
         print(name)
-        string = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+        string = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + name + '?api_key='
         r = requests.get(string)
         print(string)
         data = r.json()
         participantID = str(data["id"])
         participantLevel = str(data["summonerLevel"])
         participantName = data["name"]
-        string4 = 'https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/' + participantID + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+        string4 = 'https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/' + participantID + '?api_key=R'
         print(string4)
         finar = requests.get(string4)
         data4 = finar.json()
@@ -69,12 +69,12 @@ async def on_message(message):
         space = ' '
         name = space.join(name)
         print(name)
-        string = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+        string = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + name + '?api_key='
         r = requests.get(string)
         data = r.json()
         print(data)
         summ = data["id"]
-        string2 = 'https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/' + str(summ) + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+        string2 = 'https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/' + str(summ) + '?api_key='
         print(string2)
         rtwo = requests.get(string2)
         dataa = rtwo.json()
@@ -90,12 +90,12 @@ async def on_message(message):
             participantName = participant['summonerName']
             participantNames.append(participantName)
             
-            string3 = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + participantNames[counter] + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+            string3 = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + participantNames[counter] + '?api_key='
             r3 = requests.get(string3)
             data3 = r3.json()
             participantID = str(data3["id"])
             participantLevel = str(data3["summonerLevel"])
-            string4 = 'https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/' + participantID + '?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82'
+            string4 = 'https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/' + participantID + '?api_key='
             
             print(string4)
             finar = requests.get(string4)
@@ -161,14 +161,14 @@ async def on_message(message):
         if len(args) == 2:
             champName = args[1]
         print(champName)
-        r = requests.get('https://na1.api.riotgames.com/lol/static-data/v3/champions?api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82')
+        r = requests.get('https://na1.api.riotgames.com/lol/static-data/v3/champions?api_key=')
         data = r.json()
         if champName not in data["data"]:
             await client.send_message(message.channel, "That champion doesn't exist! Please use proper caps and spelling")
         else:
             
             champID = data["data"][champName]["id"]
-            r = requests.get("https://na1.api.riotgames.com/lol/static-data/v3/champions/" + str(champID) + "?locale=en_US&champData=stats&api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82")
+            r = requests.get("https://na1.api.riotgames.com/lol/static-data/v3/champions/" + str(champID) + "?locale=en_US&champData=stats&api_key=")
             
             datar = r.json()
             data = datar["stats"]
@@ -206,7 +206,7 @@ async def on_message(message):
             embed.add_field(name = "Magic Resist", value = magicresist + ', ' + magicresistperlevel + ' per level')
             await client.send_message(message.channel, embed=embed)
             embed = discord.Embed(name = "Tips")
-            r = requests.get("https://na1.api.riotgames.com/lol/static-data/v3/champions/" + str(champID) + "?locale=en_US&tags=allytips&tags=enemytips&api_key=RGAPI-30070262-1d35-4800-bff3-a7d5a5c3ee82")
+            r = requests.get("https://na1.api.riotgames.com/lol/static-data/v3/champions/" + str(champID) + "?locale=en_US&tags=allytips&tags=enemytips&api_key=")
             data = r.json()
             enemy = data["enemytips"]
             print(enemy)
@@ -225,4 +225,4 @@ async def on_message(message):
             embed.add_field(name = "Against " + champName, value = enemytips)
             embed.add_field(name = "While playing " + champName, value = allytips)
             await client.send_message(message.channel, embed=embed)
-client.run("NDIyNzgzMzgxMTg1NzU3MTk0.Df3_aA.25jGy2o5MF1dyJf5KvucRE3rpxo")
+client.run("")
